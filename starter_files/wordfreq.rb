@@ -4,24 +4,42 @@ class Wordfreq
     'were', 'will', 'with']
 
     def initialize(filename)
-      contents = File.read(filename)
-      contents.downcase.gsub(/\W+/, '')
-
-      @arr = contents.split(" ").select do |el|
-        if !STOP_WORDS.index(el.downcase)
-          el
-        end
-      end
+      @contents = File.read(filename)
+      # contents.downcase.gsub(/\W+/, '')
+      #
+      # @arr = contents.split(" ").select do |el|
+      #   if !STOP_WORDS.index(el.downcase)
+      #     el
+      #   end
+      # end
     end
 
   def frequency(word)
-    output = @arr.select do |el|
-      el.downcase == word.downcase
+    index = 0
+    used = []
+    @contents.each_char do |c|
+    otherIndex = word.length + index
+      if @contents[index ... (otherIndex)] == word && (!@contents[index-1].match(/^[[:alpha:]]$/) && !@contents[otherIndex].match(/^[[:alpha:]]$/))
+        used.push(word)
+      end
+      index += 1
     end
-    output.length
+    print used
+    used.length
   end
 
   def frequencies
+    index = 0
+    used = []
+    @contents.each_char do |c|
+    otherIndex = word.length + index
+      if @contents[index ... (otherIndex)] == word && (!@contents[index-1].match(/^[[:alpha:]]$/) && !@contents[otherIndex].match(/^[[:alpha:]]$/))
+        used.push(word)
+      end
+      index += 1
+    end
+    print used
+    used.length
   end
 
   def top_words(number)
