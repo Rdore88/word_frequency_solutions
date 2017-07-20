@@ -13,6 +13,7 @@ class Wordfreq
           el
         end
       end
+      print @array
     end
 
   def frequency(word)
@@ -29,6 +30,7 @@ class Wordfreq
   end
 
   def frequencies
+    print @array
     output = {}
     @array.each do |el|
       if output.has_key?(el)
@@ -49,8 +51,14 @@ class Wordfreq
   end
 
   def print_report
+    output = []
+    sortedFrequencyArray = top_words(10)
+    sortedFrequencyArray.each do |el|
+      output.push( "#{el[0]} | #{el[1]} " + "*" * el[1])
+    end
+
+      output
   end
-end
 
 if __FILE__ == $0
   filename = ARGV[0]
@@ -65,4 +73,6 @@ if __FILE__ == $0
   else
     puts "Please give a filename as an argument."
   end
+end
+
 end

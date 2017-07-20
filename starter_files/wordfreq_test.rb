@@ -29,6 +29,7 @@ class WordfreqTest < Minitest::Test
   end
 
   def test_top_words
+    skip
     wf = Wordfreq.new fullpath('seneca_falls.txt')
     top_words = wf.top_words(5)
     assert_equal [
@@ -43,7 +44,7 @@ class WordfreqTest < Minitest::Test
   end
 
   def test_report
-    skip
+
     expected_output = <<EOF
     her | 33 *********************************
     all | 12 ************
