@@ -5,13 +5,14 @@ class Wordfreq
 
     def initialize(filename)
       @contents = File.read(filename)
-      # contents.downcase.gsub(/\W+/, '')
-      #
-      # @arr = contents.split(" ").select do |el|
-      #   if !STOP_WORDS.index(el.downcase)
-      #     el
-      #   end
-      # end
+
+      @array = @contents.gsub(/\W+/, " " ).split(" ")
+
+      @array = @array.select do |el|
+        if !STOP_WORDS.index(el.downcase)
+          el
+        end
+      end
     end
 
   def frequency(word)
@@ -24,25 +25,27 @@ class Wordfreq
       end
       index += 1
     end
-    print used
     used.length
   end
 
   def frequencies
-    index = 0
-    used = []
-    @contents.each_char do |c|
-    otherIndex = word.length + index
-      if @contents[index ... (otherIndex)] == word && (!@contents[index-1].match(/^[[:alpha:]]$/) && !@contents[otherIndex].match(/^[[:alpha:]]$/))
-        used.push(word)
+    output = {}
+    @array.each do |el|
+      if output.has_key?(el)
+        value = output[el]
+        value += 1
+        output[el] = value
+      else
+        output[el] = 1
       end
-      index += 1
     end
-    print used
-    used.length
+    output
   end
 
   def top_words(number)
+    frequencyArray = frequencies
+    output = frequencyArray.sort_by { |key, value| value }.reverse.take(number)
+    output
   end
 
   def print_report

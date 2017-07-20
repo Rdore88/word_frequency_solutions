@@ -22,7 +22,6 @@ class WordfreqTest < Minitest::Test
   end
 
   def test_frequencies
-    skip
     wf = Wordfreq.new fullpath('emancipation_proclamation.txt')
     frequencies = wf.frequencies
     assert_equal 2, frequencies['virtue']
@@ -30,7 +29,6 @@ class WordfreqTest < Minitest::Test
   end
 
   def test_top_words
-    skip
     wf = Wordfreq.new fullpath('seneca_falls.txt')
     top_words = wf.top_words(5)
     assert_equal [
