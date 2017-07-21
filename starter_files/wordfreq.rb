@@ -30,7 +30,6 @@ class Wordfreq
   end
 
   def frequencies
-    print @array
     output = {}
     @array.each do |el|
       if output.has_key?(el)
@@ -56,8 +55,7 @@ class Wordfreq
     sortedFrequencyArray.each do |el|
       output.push( "#{el[0]} | #{el[1]} " + "*" * el[1])
     end
-
-      output
+    puts output
   end
 
 if __FILE__ == $0
@@ -68,7 +66,7 @@ if __FILE__ == $0
       wf = Wordfreq.new(full_filename)
       wf.print_report
     else
-      puts "#{filename} does not exist!"
+      puts "  #{filename} does not exist!"
     end
   else
     puts "Please give a filename as an argument."
